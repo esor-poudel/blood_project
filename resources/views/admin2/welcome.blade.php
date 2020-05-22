@@ -96,6 +96,7 @@
                        <option value="AB+"> AB+ </option>
                        <option value="AB-"> AB- </option>
                        <option value="AB-"> AB- </option>
+                       <option value="AB-"> AB- </option>
                        </select>
                         </div>
                         
