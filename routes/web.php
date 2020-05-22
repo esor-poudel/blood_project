@@ -70,7 +70,7 @@ Route::get('/seeker/blood/request/',[
 
 ]);
 
-Route::post('/profile/store',[
+Route::post('/profile/store/{id}',[
     'uses'=>'ProfileController@store',
     'as'=>'profile.store'
 ]);

@@ -1,57 +1,59 @@
-
-(function ($) {
-    "use strict";
-
-
-    /*==================================================================
-    [ Validate ]*/
-    var input = $('.validate-input .input100');
-
-    $('.validate-form').on('submit',function(){
-        var check = true;
-
-        for(var i=0; i<input.length; i++) {
-            if(validate(input[i]) == false){
-                showValidate(input[i]);
-                check=false;
-            }
-        }
-
-        return check;
-    });
-
-
-    $('.validate-form .input100').each(function(){
-        $(this).focus(function(){
-           hideValidate(this);
-        });
-    });
-
-    function validate (input) {
-        if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
-            if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
-                return false;
-            }
-        }
-        else {
-            if($(input).val().trim() == ''){
-                return false;
-            }
-        }
+function validateform() {
+    var name = document.forms["myform"]["name"].value;
+    if (name == null || name == "") {
+        alert("name must be filled out");
+        document.forms["myform"]["name"].focus()
+        return false;
     }
 
-    function showValidate(input) {
-        var thisAlert = $(input).parent();
+    /* var email=document.forms["myform"]["email"].value;
+     if (validateEmail(email)==false) {
+         alert("please enter valid email");
+         document.forms["myform"]["email"].focus();
+         return false;
+     } 
+     var pwd = document.forms["myform"]["pwd"].value;
+     if (pwd.length < 8) {
+         alert("password should be at least 8 character in length");
+         document.forms["myform"]["pwd"].focus();
+         return false;
+     }
 
-        $(thisAlert).addClass('alert-validate');
-    }
+     var gender=document.forms["myform"]["gender"];
+     var genderchecked=false;
 
-    function hideValidate(input) {
-        var thisAlert = $(input).parent();
+     for (var i = 0; i<gender.length; i++) {
+         if(gender[i].checked){
+             genderchecked=true;
+         }
 
-        $(thisAlert).removeClass('alert-validate');
-    }
-    
-    
+         }
+         if(genderchecked==false){
+             alert("please choose gender")
+             return false;
+         }
+         var hobbies=document.forms["myform"]["hobbies"];
+         var hobbieschecked=false;
+         for(var j=0;j<hobbies.length;j++){
+             if (hobbies[j].checked) {
+                 hobbieschecked=true;
+                 break;
+             }
+         }
+         if(hobbieschecked == false){
+             alert("please choose at least one hobby");
+             return false;
+         }
 
-})(jQuery);
+         var occupation= document.forms["myform"]["occupation"].value;
+         if(occupation == "0"){
+             alert("please select your occupation");
+             return false;
+         }
+     
+         function validateEmail(email){
+             var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+     return re.test(email);
+         } 
+     }
+     */

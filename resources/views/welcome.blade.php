@@ -11,6 +11,10 @@
 
         <!-- Styles -->
         <style>
+                  #map {
+        height: 500px;  /* The height is 400 pixels */
+        width: 400%;  /* The width is the width of the web page */
+       }
             html, body {
                 background-color: #fff;
                 color: #636b6f;
@@ -109,8 +113,29 @@
                     <a href="{{route('blood.need')}}">post need for blood</a>
 
                     </div>
+                    <div class="form-group">
+                        <label for="map">map</label>
+                        <input type="text" id="searchmap">
+                        <div id="map"></div>
+
+                    </div>
                 </div>
             </div>
         </div>
+        <script>
+            // Initialize and add the map
+            function initMap() {
+              // The location of Uluru
+              var uluru = {lat: 27.717245, lng: 85.323959};
+              // The map, centered at Uluru
+              var map = new google.maps.Map(
+                  document.getElementById('map'), {zoom: 5, center: uluru});
+              // The marker, positioned at Uluru
+             // var marker = new google.maps.Marker({position: uluru, map: map});
+            }
+                </script>
+                <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKTEDvIvNu8mWE8OwLtE0d_nIvDK4BuY4&callback=initMap">
+                </script>
     </body>
 </html>

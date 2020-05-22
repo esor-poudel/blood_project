@@ -25,8 +25,8 @@
            @foreach($result as $results)
             <tr>
             <td> {{$results->name}} </td>
-            <td>{{$results->birth}}</td>
-            <td>{{$results->d_date}}</td>
+            <td> {{date('F j,Y',strtotime($results->birth))}}</td>
+            <td>{{date('F j,Y',strtotime($results->d_date))}}</td>
             <td>{{$results->b_group}}</td>
             <td>{{$results->address}}</td>
             <td>{{$results->ph_number}}</td>

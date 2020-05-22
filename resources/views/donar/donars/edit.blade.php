@@ -1,13 +1,19 @@
 @extends('layouts.forum') 
 @section ('content')
-@if($show_form == false)
-    
-<form action="{{route('profile.store')}}" method="post">
+ @foreach($current_profile as $donar)
+<div class="text-center"><h1>Hi {{$donar->name}}</h1></div>
+<div class="text-center"><h6>your last donation date is {{date('F j,Y',strtotime($donar->d_date))}}, address= {{$donar->address}} and mobile number= {{$donar->ph_number}}</h6></div>
+<div class="text-center"><h4>update profile</h4></div>
+<form action="{{route('profile.store',['id'=>$donar->id])}}" method="post">
                     {{csrf_field()}}
 
                     <div class="form-group">
-                    <label for="name">Last Donate Date</label>
-                    <input type="date" name="date" class="form-control">
+
+
+                        <label for="name">Last Donate Date</label>
+                        <input type="date" name="date" class="form-control">
+
+                        
                     </div>
 
                     
@@ -15,12 +21,7 @@
                         <div class="text-center">
                         <button class="btn btn-success " type="submit">update profile</button>
                      </div>
-                     @else
-                     <h1>please fill the Donar Form</h1>
-
-
-                     @endif
-
+                     @endforeach
 
 
  @endsection

@@ -9,8 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +16,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -71,7 +70,13 @@
                 </div>
             </div>
         </nav>
-
+        @if(count($errors)> 0)
+        <ul class="list-group-item">
+        @foreach($errors->all() as $error)
+                <li class="list-group-item text-danger">{{$error}}</li>
+        @endforeach
+        </ul>
+    @endif
         <main class="py-4">
              <div class="container">
                 <div class="row">
@@ -97,5 +102,19 @@
                        </div>  
         </main>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/toastr.min.js') }}" ></script>
+    <script>
+     @if(Session::has('success'))
+        toastr.success("{{Session::get('success')}}");
+    @endif
+
+    @if(Session::has('info'))
+        toastr.info("{{Session::get('info')}}");
+    @endif
+    
+    
+    </script>
 </body>
 </html>

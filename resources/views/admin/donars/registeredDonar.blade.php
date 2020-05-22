@@ -21,8 +21,8 @@
            @foreach($donars as $donar)
             <tr>
             <td> {{$donar->name}} </td>
-            <td>{{$donar->birth}}</td>
-            <td>{{$donar->d_date}}</td>
+            <td>{{date('F j,Y',strtotime($donar->birth))}}</td>
+            <td>{{date('F j,Y',strtotime($donar->d_date))}}</td>
             <td>{{$donar->b_group}}</td>
             <td>{{$donar->address}}</td>
             <td>{{$donar->ph_number}}</td>

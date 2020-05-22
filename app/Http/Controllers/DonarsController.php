@@ -29,7 +29,7 @@ class DonarsController extends Controller
 
       $donar= Donar::where('approved',0)->get();
     
-        return view('admin.donars.index')->with('donars',$donar)
+        return view('admin.donars.unregisteredDonar')->with('donars',$donar)
                                          ->with('approved',$unapproved_donar);
     }
 
@@ -102,7 +102,7 @@ class DonarsController extends Controller
     public function alldonar()
     {
         $donars = Donar::where('approved',1)->get();
-        return view('admin.donars.alldonar')->with('donars',$donars);
+        return view('admin.donars.registeredDonar')->with('donars',$donars);
                                             
     }
 

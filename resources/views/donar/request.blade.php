@@ -28,7 +28,7 @@
             <td>{{$r->contact_name}}</td>
             <td>{{$r->mobile_no}}</td>
             <td>{{$r->email}}</td>
-            <td>{{$r->need_date}}</td>
+            <td>{{date('F j,Y',strtotime($r->need_date))}}</td>
             <td> <a href="{{route('need.accept',['id'=>$d->id,'need'=>$r->id])}}"><b>accept</b></a> </td>
            
             </tr>

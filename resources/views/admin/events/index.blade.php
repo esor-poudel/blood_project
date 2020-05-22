@@ -31,8 +31,8 @@
             {{$event->name}}
 
             </td>
-            <td>{{$event->start_date}}</td>
-            <td>{{$event->end_date}}</td>
+            <td>{{date('F j,Y',strtotime($event->start_date))}}</td>
+            <td>{{date('F j,Y',strtotime($event->end_date))}}</td>
 
             <td>
             <a href="{{route('events.edit',['event'=>$event->id])}}" class="btn btn-sm btn-info">
