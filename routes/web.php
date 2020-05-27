@@ -18,8 +18,8 @@ Route::get('/',[
 
 Auth::routes();
 
-Route::get('/test',function(){
-    return (App\Donar::where('user_id',auth::id())->first());
+Route::get('/markAsRead',function(){
+    auth()->user()->unreadNotifications->markAsRead();
 });
 
 Route::post('donar/search',[
@@ -115,3 +115,6 @@ Route::get('/all/donars',[
     'uses'=>'DonarsController@alldonar',
     'as'=>'register.donar'
 ]);
+
+
+

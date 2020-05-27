@@ -22,10 +22,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="{{ route('home') }}">
+                   Easy Blood Portal(admin)
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -50,6 +50,21 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item dropdown" id="markasread" onclick="marknotificationasread()">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                 <span class="glyphicon glyphicon-envelope"></span>Notifications<span class="badge badge-light">{{count(auth()->user()->unreadNotifications)}}</span>
+                                </a>
+                               
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li>
+                                    @forelse(auth()->user()->unreadNotifications as $notification)
+                                    @include('layouts.notifications.'.snake_case(class_basename($notification->type)))
+                                  @empty 
+                                  no donar yet
+                                  @endforelse
+                                    </li>
+    
+                                </ul>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -122,6 +137,7 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/main.js') }}" defer></script>
     <script src="{{ asset('js/toastr.min.js') }}" ></script>
     <script>
      @if(Session::has('success'))

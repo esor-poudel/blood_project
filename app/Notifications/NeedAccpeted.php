@@ -10,15 +10,16 @@ use Illuminate\Notifications\Messages\MailMessage;
 class NeedAccpeted extends Notification
 {
     use Queueable;
+    public $donars;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($donar)
     {
-        //
+        $this->donars= $donar;
     }
 
     /**
@@ -41,8 +42,9 @@ class NeedAccpeted extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('blood need accepted.')
-                    ->action('View Donar', url('/'))
+        ->greeting('Hello From Easy Blood Portal')
+                    ->line('your blood need is accepted.')
+                    ->action('View Donar',url('/'))
                     ->line('Thank you for using our application!');
     }
 

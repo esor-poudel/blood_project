@@ -22,8 +22,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="{{ route('dashboard') }}">
+                    Easy Blood Portal
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -82,7 +82,7 @@
                 <div class="row">
                    <div class="col-lg-4">
                      <ul class="list-group">
-                        
+                        @if(Auth::check())
                      <li class="list-group-item">
                             <a href="{{route('donar.show')}}">Become a donar </a>
                      </li>
@@ -91,7 +91,7 @@
                      <li class="list-group-item">
                         <a href="{{route('profile.index')}}">Update Profile </a>
                      </li>
-                   
+                   @endif
                        
                    </ul>
                    </div>

@@ -5,8 +5,9 @@ use App\Need;
 use Auth;
 use Notification;
 use App\Donar;
+use App\Notifications\NeedAccpeted;
 use Session;
-
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Http\Request;
 
 class NeedController extends Controller
@@ -55,17 +56,21 @@ class NeedController extends Controller
     {
         $donar= Donar::find($id);
         $n= Need::find($need);
+        $notification= $n->email;
+        Notification::route('mail', $notification)
+        ->route('nexmo', '5555555555')
+        ->notify(new NeedAccpeted($donar));
 
        
         
        $n->status= 1;
         $n->save();
        
-        //Notification::send($n, new \App\Notifications\NeedAccpeted($donar));
-
+       
 
         Session::flash('success','please visit given place for donation');
         return redirect()->back();
+       
 
 
     }

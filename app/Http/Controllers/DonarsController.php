@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Donar;
+use App\Notifications\NewDonarAdded;
 use App\Need;
 use Carbon;
 use App\User;
@@ -51,6 +52,9 @@ class DonarsController extends Controller
      */
     public function store(Request $request)
     {
+       $admin= User::where('admin',1)->first();
+       $notification= Donar::where('user_id',auth::id());
+      // dd($admin);
        // dd(request()->all());
         $this->validate($request,[
             'name'=>'required',
@@ -71,6 +75,7 @@ class DonarsController extends Controller
         $donar->d_date= $request->d_date;
         $donar->user_id= Auth::id();
         $donar->save();
+       $admin->notify(new NewDonarAdded($notification));
         Session::flash('success','register completed');
        // $donar->delete();
         return redirect()->route('dashboard');
