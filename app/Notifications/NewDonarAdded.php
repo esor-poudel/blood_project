@@ -6,12 +6,13 @@ use Illuminate\Bus\Queueable;
 use Carbon\carbon;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class NewDonarAdded extends Notification
 {
     use Queueable;
-    protected $notification;
+    public $notification;
 
     /**
      * Create a new notification instance.
@@ -31,7 +32,7 @@ class NewDonarAdded extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -47,6 +48,16 @@ class NewDonarAdded extends Notification
            'notification'=>$this->notification,
            'user'=>$notifiable
         ];
+    }
+
+
+    public function toBroadcast($notifiable)
+    {
+       
+        return new BroadcastMessage( [
+           'notification'=>$this->notification,
+           'user'=>$notifiable
+        ]);
     }
 
      /**

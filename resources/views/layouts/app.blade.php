@@ -10,7 +10,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-  
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -50,21 +54,9 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown" id="markasread" onclick="marknotificationasread()">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                 <span class="glyphicon glyphicon-envelope"></span>Notifications<span class="badge badge-light">{{count(auth()->user()->unreadNotifications)}}</span>
-                                </a>
-                               
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li>
-                                    @forelse(auth()->user()->unreadNotifications as $notification)
-                                    @include('layouts.notifications.'.snake_case(class_basename($notification->type)))
-                                  @empty 
-                                  no donar yet
-                                  @endforelse
-                                    </li>
-    
-                                </ul>
+                        {{-- // notification --}}
+                        <notification :userid="{{auth()->id()}}" :unreads="{{auth()->user()->unreadNotifications}}"></notification>
+                            {{-- <notification :userId="{{auth()->id()}}" :unreads="{{auth()->user()->unreadNotifications}}"></notification> --}}
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
