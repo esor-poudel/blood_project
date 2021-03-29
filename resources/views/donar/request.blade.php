@@ -8,7 +8,6 @@
 
             <thead>
 
-            <th> Needed Blood Group </th>
             <th>Place Required</th>
             <th>Contact Person</th>
             <th>Number</th> 
@@ -23,13 +22,12 @@
            @foreach($donar as $d)
            @if($r->blood_group==$d->b_group)
             <tr>
-            <td><b>{{$r->blood_group}}</b>  </td>
             <td>{{$r->place}}</td>
             <td>{{$r->contact_name}}</td>
             <td>{{$r->mobile_no}}</td>
             <td>{{$r->email}}</td>
             <td>{{date('F j,Y',strtotime($r->need_date))}}</td>
-            <td> <a href="{{route('need.accept',['id'=>$d->id,'need'=>$r->id])}}"><b>accept</b></a> </td>
+            <td> <a class="btn btn-sm btn-info" href="{{route('need.accept',['id'=>$d->id,'need'=>$r->id])}}"><b>accept</b></a> </td>
            
             </tr>
             @endif

@@ -54,8 +54,10 @@ class NeedController extends Controller
 
     public function needaccept($id,$need)
     {
+        
         $donar= Donar::find($id);
         $n= Need::find($need);
+        //dd($n);
         $notification= $n->email;
         Notification::route('mail', $notification)
         ->route('nexmo', '5555555555')

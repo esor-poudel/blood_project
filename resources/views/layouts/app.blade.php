@@ -87,12 +87,18 @@
                 </div>
             </div>
         </nav>
-       
+        @if(count($errors)> 0)
+        <ul class="list-group-item">
+        @foreach($errors->all() as $error)
+                <li class="list-group-item text-danger">{{$error}}</li>
+        @endforeach
+        </ul>
+    @endif
 
         <main class="py-4">
              <div class="container">
                 <div class="row">
-                   <div class="col-lg-4">
+                   <div class="col-lg-3">
                      <ul class="list-group">
                      @if(Auth::check())
                      @if (Auth::user()->admin)
@@ -113,6 +119,16 @@
 
                         <li class="list-group-item">
                             <a href="{{route('blood.request')}}">Requested Blood </a>
+                        </li>
+
+                        
+                        <li class="list-group-item">
+                            <a href="{{route('bloodbanks.index')}}">Blood Bank </a>
+                        </li>
+
+                        
+                        <li class="list-group-item">
+                            <a href="{{route('bloodbanks.create')}}">Add Blood Bank </a>
                         </li>
 
 
@@ -136,6 +152,7 @@
         </main>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
     <script src="{{ asset('js/toastr.min.js') }}" ></script>

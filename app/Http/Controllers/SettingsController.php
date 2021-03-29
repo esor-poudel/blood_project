@@ -47,7 +47,7 @@ class SettingsController extends Controller
         $settings->contact_number=$request->contact_number;
         $settings->save();
         Session::flash('success','setting created successfully');
-        return redirect()->route('admin.settings.index');
+        return redirect()->route('settings.index');
     }
 
     /**
@@ -92,7 +92,7 @@ class SettingsController extends Controller
             $settings->contact_number=$request->contact_number;
             $settings->save();
             Session::flash('success','setting updated successfully');
-            return redirect()->route('admin.settings.index');
+            return redirect()->route('settings.index');
 
     }
 

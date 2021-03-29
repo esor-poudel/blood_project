@@ -3,11 +3,19 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Laravel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+         <!-- Fonts -->
+            <link rel="dns-prefetch" href="//fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+            <!-- Styles -->
+            <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -86,6 +94,7 @@
             <div class="content">
                         
                         <form action="{{route('donars.search')}}" method="post">
+                           
                             {{csrf_field()}}
                                              
                     <div class="form-group">
@@ -101,6 +110,7 @@
                        <option value="AB-"> AB- </option>
                        </select>
                         </div>
+
                         
                             
                     <div class="form-group">
@@ -111,7 +121,41 @@
                         </form>
 
                     <a href="{{route('blood.need')}}">post need for blood</a>
+                    <br>
+                    <a href="{{route('bloodbank.user')}}">blood bank login</a>
 
-                   
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                    <script src="{{ asset('js/app.js') }}" defer></script> 
+                    <script>
+
+$(document).ready(function(){
+       $('select[name="district"]').on('change',function(){
+            var district_id = $(this).val();
+            if(district_id)
+            {
+                console.log(district_id);
+                $.ajax({
+                    url: '/searchCity/'+district_id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data)
+                    {
+                        console.log(data);
+                        $('select[name="city"]').empty();
+                        $.each(data, function(key, value){
+                            $('select[name="city"]').append('<option value="'+key+'">'+value+'</option>')
+                        });
+                    }
+
+                });
+            }else
+            {
+                $('select[name="city"]').empty();
+
+            }
+       });
+    });
+                    </script>
     </body>
+    
 </html>

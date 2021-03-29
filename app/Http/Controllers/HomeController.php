@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Need;
+use Carbon\Carbon;
 use App\Donar;
 
 class HomeController extends Controller
@@ -39,8 +40,8 @@ class HomeController extends Controller
 
             }
             $count=0;
-           $d= Donar::where('approved',1)->where('user_id',Auth::id())->get();
-            //dd($d);
+           $d= Donar::where('approved',1)->where('user_id',Auth::id())->whereMonth('d_date','>', '3')->get();
+           
            $n= Need::where('status',0)->get();//->pluck('blood_group')->first();
           //dd($n);
          

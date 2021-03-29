@@ -1,1 +1,1 @@
-<a href="{{route('donar')}}" class="">hey! {{$notification->data['user']['name']}} new donar is registered</a>
+<a href="{{route('donar')}}" class=""> new donar is registered</a>

@@ -3,7 +3,13 @@
 @section('content')
 
             <div class="card">
+              @if($existing_donar==false)
+              @if($current_donar_status->approved==1)
                 <div class="card-header">Dashboard</div>
+                @else
+                <div class="card-header"><h4>Thanks For The Membership {{Auth::user()->name}}</h4></div>
+                @endif
+                @endif
 
                 <div class="card-body">
                     @if (session('status'))
@@ -27,41 +33,32 @@
                          @foreach($donar as $d)
                          @foreach($need as $n)
                          @if($d->b_group == $n->blood_group)
+                         
                         
                          {{$n->contact_name}}  {{$n->mobile_no}}<br>
+
+                        
                        
                          
                        
-                         @endif
-
-                         @endforeach
-                         @endforeach
-                        
                            
                           </div>
+                          <div>
                           <div class="card-footer text-muted">
                           <a href="{{route('donar.request.view')}}" class="btn btn-primary">view</a>
+                          </div>
+                          @endif
+                          @endforeach
+                          @endforeach
                           </div>
                         </div>
                        
                        
+                       
+                       
                         <br><br>
                    
-                    <div class="col-lg-3">
-                        <div class="card text-center" style="width: 10rem;">
-                            <div class="card-header">
-                              Status
-                            </div>
-                            <div class="card-body">
-                              approved
-                            </div>
-                          </div>
-
-
-                          
-
-
-                   
+                  
                     @else
                     <div class="col-lg-3">
                         <div class="card text-center">

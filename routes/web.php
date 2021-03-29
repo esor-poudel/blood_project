@@ -13,7 +13,7 @@
 
 Route::get('/',[
     'uses'=>'FrontEndController@index',
-    'as'=>'home'
+    'as'=>'home.show'
 ]);
 
 Auth::routes();
@@ -57,6 +57,14 @@ Route::get('/donar/becomedonar',[
     'as'=>'donar.show'
 ]);
 
+Route::get('/getCity/{id}',[
+'uses'=>'DonarsController@getcity',
+]);
+
+Route::get('/searchCity/{id}',[
+    'uses'=>'FrontEndController@city',
+    ]);
+
 
 
 Route::post('/login/users',[
@@ -81,6 +89,7 @@ Route::get('/donar/profile',[
 ]);
 
 Route::get('/seeker/need/accept/{id}/{need}',[
+ 
     'uses'=>'NeedController@needaccept',
     'as'=>'need.accept'
 ]);
@@ -96,7 +105,10 @@ Route::resource('settings','SettingsController');
 Route::post('/donars/store',[
     'uses'=>'DonarsController@store',
     'as'=>'donars.store'
+
+
 ]);
+
 Route::get('/donars',[
     'uses'=>'DonarsController@index',
     'as'=>'donar'
@@ -106,7 +118,7 @@ Route::get('donar/accept/{id}',[
     'uses'=>'DonarsController@restore',
     'as'=>'donars.restore'
 ]);
-Route::post('/donar/delete/{id}',[
+Route::post('/donar/delete/{id}/{user_id}',[
     'uses'=>'DonarsController@kill',
     'as'=>'donars.destroy'
 ]);
@@ -114,6 +126,16 @@ Route::post('/donar/delete/{id}',[
 Route::get('/all/donars',[
     'uses'=>'DonarsController@alldonar',
     'as'=>'register.donar'
+]);
+
+Route::resource('bloodbanks','BloodBankController');
+Route::get('/bank/login',[
+    'uses'=>'CustomeLoginController@login',
+    'as'=>'bloodbank.user'
+]);
+Route::post('/login/successful',[
+    'uses'=>'CustomeLoginController@success',
+    'as'=>'login.successful'
 ]);
 
 

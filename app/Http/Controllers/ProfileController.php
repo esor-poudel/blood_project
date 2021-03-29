@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Carbon\Carbon;
 use Session;
 use App\Donar;
 
@@ -35,11 +36,20 @@ class ProfileController extends Controller
 
     public function store(Request $request,$id)
     {
+        //dd($request->all());
         $this->validate($request,[
 
-            'date'=>'required'
+            'date'=>'required|date_format:Y-m-d|before:'.Carbon::now(),
+            'image'=>'image'
         ]);
         $donar = Donar::find($id);
+        if($request->hasfile('image')){
+            $file=$request->file('image');
+            $extension=$file->getClientOriginalExtension();
+            $filename= time().'.'.$extension;
+            $file->move('uploads/image',$filename);
+            $donar->image=$filename;
+        }
         $donar->d_date= $request->date;
         $donar->save();
         Session::flash('success','last donated date updated');

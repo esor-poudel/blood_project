@@ -16,12 +16,14 @@ class CreateDonarsTable extends Migration
         Schema::create('donars', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('district_id')->unsigned();
+            $table->integer('city_id')->unsigned();
+            $table->string('image')->nullable();
             $table->string('name');
             $table->date('birth');
             $table->string('b_group');
             $table->date('d_date');
             $table->biginteger('ph_number');
-            $table->string('address');
             $table->boolean('approved')->default(0);
             $table->timestamps();
         });

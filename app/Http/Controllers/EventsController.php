@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use carbon\Carbon;
 use Session;
 
 class EventsController extends Controller
@@ -15,6 +16,7 @@ class EventsController extends Controller
      */
     public function index()
     {
+        $autodelete= Event::where('end_date','<',Carbon::now())->delete();
         return view('admin.events.index')->with('events',Event::all());
     }
 
@@ -40,13 +42,16 @@ class EventsController extends Controller
       $this->validate($request,[
                 'name'=>'required',
                 'email'=>'required|email',
-                'start_date'=>'required|date_format:Y-m-d',
-                'end_date'=>'required|date_format:Y-m-d',
+                'start_date'=>'required|date_format:Y-m-d|after:today',
+                'end_date'=>'required|date_format:Y-m-d|after:start_date',
                 'ph_number'=>'required',
                 'venue'=>'required',
                 'organizer'=>'required',
                 'location'=>'required'
-        ]);
+      ],
+    [
+        'start_date.after'=>'provide valid start date'
+    ]);
 
       //  dd($eventdata);
 
@@ -62,7 +67,7 @@ class EventsController extends Controller
 
         $event->save();
         Session::flash('success','event created');
-        return redirect()->route('admin.events.index');
+        return redirect()->route('events.index');
 
 
     }
@@ -110,7 +115,7 @@ class EventsController extends Controller
         $eventdata->name=$request->name;
         $eventdata->save();
         Session::flash('success','event updated');
-        return redirect()->route('admin.events.index');
+        return redirect()->route('events.index');
     }
 
     /**
@@ -125,5 +130,9 @@ class EventsController extends Controller
         $event->delete();
         Session::flash('success','event deleted');
         return redirect()->back();
+    }
+    public function UocomingEvents()
+    {
+
     }
 }

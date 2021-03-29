@@ -11,7 +11,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        @if($settings->count()<=2)
+                        @if($settings->count()<1)
                     <form action="{{route('settings.store')}}" method="post">
                     {{csrf_field()}}
 
@@ -37,7 +37,7 @@
                     </div>
                     </div>
                     @else
-                   <h1>cannot create more setting</h1>
+                   <h1 style=" text-align: center;">cannot create more setting</h1>
                     @endif
 
             
