@@ -1,161 +1,161 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Laravel</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-         <!-- Fonts -->
-            <link rel="dns-prefetch" href="//fonts.gstatic.com">
-            <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <title>Laravel</title>
 
-            <!-- Styles -->
-            <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
-                  #map {
-        height: 350px;  /* The height is 400 pixels */
-        width: 250%;  /* The width is the width of the web page */
-       }
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
 
-            .full-height {
-                height: 100vh;
-            }
+    <!-- Styles -->
+    <style>
+        #map {
+            height: 350px;
+            /* The height is 400 pixels */
+            width: 250%;
+            /* The width is the width of the web page */
+        }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+        html,
+        body {
+            background-color: #fff;
+            color: #636b6f;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 200;
+            height: 100vh;
+            margin: 0;
+        }
 
-            .position-ref {
-                position: relative;
-            }
+        .full-height {
+            height: 100vh;
+        }
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
 
-            .content {
-                text-align: center;
-            }
+        .position-ref {
+            position: relative;
+        }
 
-            .title {
-                font-size: 84px;
-            }
+        .top-right {
+            position: absolute;
+            right: 10px;
+            top: 18px;
+        }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+        .content {
+            text-align: center;
+        }
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+        .title {
+            font-size: 84px;
+        }
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
+        .links>a {
+            color: #636b6f;
+            padding: 0 25px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .m-b-md {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-center position-ref full-height">
+        @if (Route::has('login'))
+        <div class="top-right links">
+            @auth
+            <a href="{{ url('/home') }}">Home</a>
+            @else
+            <a href="{{ route('login') }}">Login</a>
+
+            @if (Route::has('register'))
+            <a href="{{ route('register') }}">Register</a>
             @endif
+            @endauth
+        </div>
+        @endif
 
-            <div class="content">
-                        
-                        <form action="{{route('donars.search')}}" method="post">
-                           
-                            {{csrf_field()}}
-                                             
-                    <div class="form-group">
-                        <label for="name">Blood Group</label>
-                       <select id="b_group" name="search">
-                       <option value="A+"> A+ </option>
-                       <option value="A-"> A- </option>
-                       <option value="B+"> B+ </option>
-                       <option value="B-"> B- </option>
-                       <option value="O+"> O+ </option>
-                       <option value="O-"> O- </option>
-                       <option value="AB+"> AB+ </option>
-                       <option value="AB-"> AB- </option>
-                       </select>
-                        </div>
+        <div class="content">
 
-                        
-                            
-                    <div class="form-group">
-                        <div class="text-center">
+            <form action="{{route('donars.search')}}" method="post">
+
+                {{csrf_field()}}
+
+                <div class="form-group">
+                    <label for="name">Blood Group</label>
+                    <select id="b_group" name="search">
+                        <option value="A+"> A+ </option>
+                        <option value="A-"> A- </option>
+                        <option value="B+"> B+ </option>
+                        <option value="B-"> B- </option>
+                        <option value="O+"> O+ </option>
+                        <option value="O-"> O- </option>
+                        <option value="AB+"> AB+ </option>
+                        <option value="AB-"> AB- </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="text-center">
                         <button class="btn btn-success " type="submit">search</button>
-                        </div>
+                    </div>
 
-                        </form>
+            </form>
 
-                    <a href="{{route('blood.need')}}">post need for blood</a>
-                    <br>
-                    <a href="{{route('bloodbank.user')}}">blood bank login</a>
+            <a href="{{route('blood.need')}}">post need for blood</a>
+            <br>
+            <a href="{{route('bloodbank.user')}}">blood bank login</a>
 
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                    <script src="{{ asset('js/app.js') }}" defer></script> 
-                    <script>
-
-$(document).ready(function(){
-       $('select[name="district"]').on('change',function(){
-            var district_id = $(this).val();
-            if(district_id)
-            {
-                console.log(district_id);
-                $.ajax({
-                    url: '/searchCity/'+district_id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data)
-                    {
-                        console.log(data);
-                        $('select[name="city"]').empty();
-                        $.each(data, function(key, value){
-                            $('select[name="city"]').append('<option value="'+key+'">'+value+'</option>')
-                        });
-                    }
-
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="{{ asset('js/app.js') }}" defer></script>
+            <script>
+                $(document).ready(function() {
+                    $('select[name="district"]').on('change', function() {
+                        var district_id = $(this).val();
+                        if (district_id) {
+                            console.log(district_id);
+                            $.ajax({
+                                url: '/searchCity/' + district_id,
+                                type: 'GET',
+                                dataType: 'json',
+                                success: function(data) {
+                                    console.log(data);
+                                    $('select[name="city"]').empty();
+                                    $.each(data, function(key, value) {
+                                        $('select[name="city"]').append(
+                                            '<option value="' + key + '">' +
+                                            value + '</option>')
+                                    });
+                                }
+                            });
+                        } else {
+                            $('select[name="city"]').empty();
+                        }
+                    });
                 });
-            }else
-            {
-                $('select[name="city"]').empty();
+            </script>
+</body>
 
-            }
-       });
-    });
-                    </script>
-    </body>
-    
 </html>

@@ -13,16 +13,19 @@ class DistrictTableSeeder extends Seeder
     public function run()
     {
         District::create([
+            'id'=>'1',
             'name'=>'kathmandu',
 
         ]);
-        
+    
         District::create([
+            'id'=>'2',
             'name'=>'bhaktapur',
                             
         ]);
         
         District::create([
+            'id'=>'3',
             'name'=>'lalitpur',
                             
         ]);

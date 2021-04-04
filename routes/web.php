@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::get('/',[
     'uses'=>'FrontEndController@index',
     'as'=>'home.show'
@@ -138,5 +140,14 @@ Route::post('/login/successful',[
     'as'=>'login.successful'
 ]);
 
+Route::get('/city/add',[
+    'uses'=>'DistrictCityController@cityadd',
+    'as'=>'city.add'
+]);
+
+Route::get('/city/create',[
+    'uses'=>'DistrictCityController@citycreate',
+    'as'=>'city.create'
+]);
 
 

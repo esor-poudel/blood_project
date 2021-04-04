@@ -136,6 +136,8 @@
     $(document).ready(function(){
        $('select[name="district"]').on('change',function(){
             var district_id = $(this).val();
+            
+
             if(district_id)
             {
                 console.log(district_id);
